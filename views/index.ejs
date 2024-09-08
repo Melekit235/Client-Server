@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Список задач</title>
+</head>
+<body>
+  <h1>Список задач</h1>
+  <a href="/new">Добавить новую задачу</a>
+  <form method="GET" action="/">
+    <select name="filter" onchange="this.form.submit()">
+      <option value="all" <%= filter === 'all' ? 'selected' : '' %>>Все</option>
+      <option value="pending" <%= filter === 'pending' ? 'selected' : '' %>>В ожидании</option>
+      <option value="completed" <%= filter === 'completed' ? 'selected' : '' %>>Завершено</option>
+    </select>
+  </form>
+  <ul>
+    <% tasks.forEach(task => { %>
+      <li>
+        <strong><%= task.title %></strong>
+        <span>(<%= task.status %>, завершить до: <%= task.dueDate %>)</span>
+        <% if (task.file) { %>
+          <a href="/uploads/<%= task.file %>" download>Скачать файл</a>
+        <% } %>
+        <a href="/edit/<%= task.id %>">Редактировать</a>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title><%= task.id ? 'Редактировать задачу' : 'Новая задача' %></title>
+</head>
+<body>
+  <h1><%= task.id ? 'Редактировать задачу' : 'Новая задача' %></h1>
+  <form action="<%= action %>" method="<%= method %>" enctype="multipart/form-data">
+    <label>Название задачи:</label>
+    <input type="text" name="title" value="<%= task.title || '' %>" required>
+    
+    <label>Статус:</label>
+    <select name="status">
+      <option value="pending" <%= task.status === 'pending' ? 'selected' : '' %>>В ожидании</option>
+      <option value="completed" <%= task.status === 'completed' ? 'selected' : '' %>>Завершено</option>
+    </select>
+    
+    <label>Дата завершения:</label>
+    <input type="date" name="dueDate" value="<%= task.dueDate || '' %>" required>
+
+    <label>Файл (опционально):</label>
+    <input type="file" name="file">
+
+    <button type="submit"><%= task.id ? 'Сохранить изменения' : 'Создать задачу' %></button>
+  </form>
+  <a href="/">Назад к списку</a>
+</body>
+</html>
